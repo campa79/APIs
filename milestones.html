@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Magic</title>
+</head>
+<body>
+    <h1>BCRA APIs</h1>
+    <div id="datosBcra"></div>
+
+
+<script type="text/javascript">
+
+    //Capturo la data acá para visualizar en pantalla en el div.
+    let datosBcra = document.querySelector("#datosBcra")
+
+
+    const apiUrl4 = "milestones";
+    const proxyUrl = "https://bcra-proxy-cors.vercel.app";
+
+fetch(`${proxyUrl}/${apiUrl4}`, {
+  headers: {
+    Authorization:
+      "BEARER ACAVALAKEY",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {console.log(data)
+
+  //Con un FOR recorro la información
+  data.forEach((info) =>{
+    const content = document.createElement("div")
+    content.innerHTML =
+    `<h4>Al día: ${info.d} el evento ${info.e} suceció ${info.t}</h4>`
+    datosBcra.append(content) //apendeo el contenido de la API
+  })
+})
+</script>
+
+
+
+</body>

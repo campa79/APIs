@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<div id="noticias"></div>
+
+	<script type="main.js"></script>
+</body>
+
+<script type="text/javascript">
+	let key = 'bd35d7b0579d40dcacca6f0bf1cffcb2';
+	let pageSize = '20';
+	let url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=${pageSize}&apiKey=${key}`;
+	// ojo las comillas de la url son invertidas, porque le estoy pasando variables.
+	// Además, en country le paso AR para Argentina.
+	let mostrar_noticias = document.getElementById('noticias');
+
+fetch(url).then((resp) => resp.json()) //el objeto lo devuelve en formato JSON
+
+.then(dato => {
+	console.log(dato);
+	let noticias = (dato.articles);
+	noticias.map(function(numero){
+		let div = document.createElement('noticias');
+		div.innerHTML= `<br>
+						<img style="max-widhth=100px" src=${numero.urlToImage}><br>
+						<h1>${numero.title}</h1>
+						<h2>${numero.description}</h2>
+						<h3>${numero.url}</h3>
+						`;
+						mostrar_noticias.appendChild(div); // Noticia tras noticia
+	});
+});
+</script>
+</html>
